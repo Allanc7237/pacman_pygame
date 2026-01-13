@@ -12,26 +12,23 @@ width = SCREEN_WIDTH
 height = SCREEN_HEIGHT
 screen = pygame.display.set_mode((width,height))
 level_bg =  pygame.image.load(bg_directory)
-level_ui_left = pygame.Surface((427,720))
-level_ui_right = pygame.Surface((427,720))
-level_ui_left.fill("green")
-level_ui_right.fill("red")
+level_ui = pygame.Surface((640,720))
+level_ui.fill("black")
 game_clock = pygame.time.Clock()
 area = width * height
-test_nodes = generate_nodes(560,720)
+test_nodes = generate_nodes(640,720)
 screen.fill("white")
 def main():
     try:
-        print(f"{len(test_nodes)} nodes created")
+        #print(f"{len(test_nodes)} nodes created")
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     return
-            screen.blit(level_bg, (427,0))
-            screen.blit(level_ui_left, (0,0))
-            screen.blit(level_ui_right, (887,0))
+            screen.blit(level_bg, (0,0))
+            screen.blit(level_ui, (640,0))
             for node in test_nodes:
-                pygame.draw.circle(level_bg, "white",node,2)
+                pygame.draw.circle(level_bg,"white",node,2)
             pygame.display.update()
             dt = game_clock.tick(60)/1000
     except Exception as e:
