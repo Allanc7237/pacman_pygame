@@ -22,14 +22,18 @@ def main():
     try:
         #print(f"{len(test_nodes)} nodes created")
         while True:
+            mouse_pos = pygame.mouse.get_pos()
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     return
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    mouse_pos = pygame.mouse.get_pos()
-                    for node in test_nodes:
-                        if node.rect.collidepoint(mouse_pos):
-                            pygame.draw.circle(level_bg,"white",node.position,3)
+            for node in test_nodes:
+                if node.rect.collidepoint(mouse_pos):
+                    if(pygame.mouse.get_just_pressed()[0] and node.pressed == False):
+                        node.surface.fill("red")
+                        node.pressed = True
+                        break
+
             screen.blit(level_bg, (0,0))
             screen.blit(level_ui, (640,0))
             for node in test_nodes:
