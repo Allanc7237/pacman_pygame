@@ -25,10 +25,18 @@ def main():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     return
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_pos = pygame.mouse.get_pos()
+                    for node in test_nodes:
+                        if node.rect.collidepoint(mouse_pos):
+                            pygame.draw.circle(level_bg,"white",node.position,3)
             screen.blit(level_bg, (0,0))
             screen.blit(level_ui, (640,0))
             for node in test_nodes:
-                pygame.draw.circle(level_bg,"white",node,2)
+                screen.blit(node.surface,node.position)
+            
+
+
             pygame.display.update()
             dt = game_clock.tick(60)/1000
     except Exception as e:
